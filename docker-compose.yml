@@ -1,0 +1,66 @@
+version: "3.4"
+
+services:
+  robo:
+    build: ./robo-arm
+    image: ethanjahn/robo:1.0.0
+    container_name: robo
+    network_mode: "host"
+    tty: true
+    environment:
+      - "DISPLAY=${DISPLAY}"
+      - ARDUINO_IDE_VERSION=1.8.13
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/dev/ttyACM0:/dev/ttyACM0"
+      - "${HOME}/topics:/topics"
+    privileged: true
+    command: bash /home/developer/gui.sh
+    logging:
+      driver: none
+    depends_on: 
+      - roscore
+
+  roscore:
+    image: ethanjahn/robo:1.0.0
+    network_mode: "host"
+    environment:
+      - ARDUINO_IDE_VERSION=1.8.13
+    command: roscore
+
+  parse_publish:
+    image: ethanjahn/robo:1.0.0
+    network_mode: "host"
+    environment:
+      - ARDUINO_IDE_VERSION=1.8.13
+    command: bash /home/developer/parse_publish.sh
+    depends_on:
+      - robo
+      - roscore
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/dev/ttyACM0:/dev/ttyACM0"
+      - "${HOME}/topics:/topics"
+    tty: true
+    privileged: true
+
+  rosserial:
+    image: ethanjahn/robo:1.0.0
+    network_mode: "host"
+    environment:
+      - ARDUINO_IDE_VERSION=1.8.13
+    command: bash /home/developer/rosserial.sh
+    depends_on:
+      - parse_publish
+      - robo
+      - roscore
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/dev/ttyACM0:/dev/ttyACM0"
+      - "${HOME}/topics:/topics"
+    tty: true
+    privileged: true
+    
+
+
+
