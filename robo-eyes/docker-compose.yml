@@ -15,4 +15,4 @@ services:
       - "/dev/ttyACM0:/dev/ttyACM0"
       - "${HOME}/topics:/topics"
     privileged: true
-    command: bash
+    command: k4aviewer

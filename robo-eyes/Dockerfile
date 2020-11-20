@@ -8,6 +8,9 @@ RUN curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
 RUN apt-get update -y
 
+# Install the k4a-tools package which has a EULA that needs to interactively be signed
+RUN ACCEPT_EULA=Y apt-get install k4a-tools -y
+
 RUN export uid=1000 gid=1000 && \
     mkdir -p /home/developer && \
     mkdir -p /etc/sudoers.d && \
@@ -21,4 +24,14 @@ RUN export uid=1000 gid=1000 && \
 RUN sed "s/^dialout.*/&developer/" /etc/group -i \
     && sed "s/^root.*/&developer/" /etc/group -i
 
+COPY --chown=1000:1000 eyes.sh /home/developer/eyes.sh
+
+# Set rules
+RUN mkdir /etc/udev/
+COPY rules.d /etc/udev/rules.d
+
+
 USER developer
+
+
+# To actually use the thing, you need to manually install k4a-tools with `sudo apt install k4a-tools` due to EULA
