@@ -15,4 +15,4 @@ services:
       - "/dev/ttyACM0:/dev/ttyACM0"
       - "${HOME}/topics:/topics"
     privileged: true
-    command: k4aviewer
+    command: bash #roslaunch azure_kinect_ros_driver driver.launch
