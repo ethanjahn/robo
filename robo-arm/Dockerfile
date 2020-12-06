@@ -55,14 +55,15 @@ RUN [ \
     cd /home/developer" \
 ]
 
+# Copy in the braccio_arduino_ros_rviz
+RUN mkdir -p ~/catkin_ws/src
+COPY ./braccio_arduino_ros_rviz ~/catkin_ws/src/braccio_arduino_ros_rviz
+
 # Create catkin workspace and clone braccio_arduino_ros_rviz
 RUN [ \
     "/bin/bash", \
     "-c", \
     "source /opt/ros/melodic/setup.bash; \
-    mkdir -p ~/catkin_ws/src; \
-    cd ~/catkin_ws/src; \
-    git clone https://github.com/ohlr/braccio_arduino_ros_rviz.git; \
     cd ~/catkin_ws; \
     catkin_make; \
     cp -R ~/catkin_ws/src/braccio_arduino_ros_rviz/libraries/BraccioLibRos ~/Arduino/libraries" \

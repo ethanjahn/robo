@@ -77,3 +77,5 @@ Starting with 1.6.4, Arduino allows installation of third-party platform package
 - [Ubuntu Package Search](http://packages.ubuntu.com/)
 - [Install the Arduino Software (IDE) on on Linux](https://www.arduino.cc/en/Guide/Linux/)
 - [How to Install AVRDude 6.3 in Ubuntu 16.04, Ubuntu 14.04](http://ubuntuhandbook.org/index.php/2017/01/install-avrdude-6-4-ubuntu-16-04/)
+
+Credit to github user ohlr for the base repository: https://github.com/ohlr/braccio_arduino_ros_rviz
