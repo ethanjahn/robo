@@ -67,4 +67,9 @@ RUN echo "source /home/developer/catkin_ws/devel/setup.bash" >> ~/.bashrc
 RUN mkdir /etc/udev/
 COPY rules.d /etc/udev/rules.d
 
+# Copy in shell files
+COPY --chown=1000:1000 wait-for-it.sh /home/developer/wait-for-it.sh
+COPY --chown=1000:1000 eyes.sh /home/developer/gui.sh
+
+
 USER developer

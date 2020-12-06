@@ -1,4 +1,4 @@
-FROM osrf/ros:kinetic-desktop-full
+FROM osrf/ros:melodic-desktop-full
 
 ENV HOME /home/developer
 WORKDIR /home/developer
@@ -16,7 +16,7 @@ RUN export uid=1000 gid=1000 && \
 	&& apt-get install -y \
         software-properties-common \
 		wget \
-		openjdk-9-jre \
+		openjdk-11-jre \
 		xvfb \
         xz-utils \
 	sudo \
@@ -34,16 +34,16 @@ ENV ARDUINO_IDE_VERSION 1.8.13
 
 # Download rosserial & wait-for-it
 RUN apt-get update && apt-get install -y \
-    ros-kinetic-rosserial-arduino \
-    ros-kinetic-rosserial \
-    ros-kinetic-joint-state-publisher-gui
+    ros-melodic-rosserial-arduino \
+    ros-melodic-rosserial \
+    ros-melodic-joint-state-publisher-gui
 
 RUN apt-get update && apt-get upgrade -y
 
 RUN [ \
     "/bin/bash", \
     "-c", \
-    "source /opt/ros/kinetic/setup.bash; \
+    "source /opt/ros/melodic/setup.bash; \
     wget -q -O- https://downloads.arduino.cc/arduino-${ARDUINO_IDE_VERSION}-linux64.tar.xz | tar xJC  /usr/local/share; \
     ln -s /usr/local/share/arduino-${ARDUINO_IDE_VERSION} /usr/local/share/arduino; \
     ln -s /usr/local/share/arduino-${ARDUINO_IDE_VERSION}/arduino /usr/local/bin/arduino; \
@@ -59,7 +59,7 @@ RUN [ \
 RUN [ \
     "/bin/bash", \
     "-c", \
-    "source /opt/ros/kinetic/setup.bash; \
+    "source /opt/ros/melodic/setup.bash; \
     mkdir -p ~/catkin_ws/src; \
     cd ~/catkin_ws/src; \
     git clone https://github.com/ohlr/braccio_arduino_ros_rviz.git; \
@@ -70,7 +70,7 @@ RUN [ \
 
 
 # Add ros setup to .bashrc
-RUN echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
 
 ENV DISPLAY :1.0
 
