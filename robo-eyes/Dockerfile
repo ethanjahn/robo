@@ -40,6 +40,8 @@ RUN [ \
     cd ~" \
 ]
 
+COPY custom.launch /home/developer/catkin_ws/src/Azure_Kinect_ROS_Driver/launch/custom.launch
+
 RUN export uid=1000 gid=1000 && \
     mkdir -p /home/developer && \
     mkdir -p /etc/sudoers.d && \

@@ -57,7 +57,7 @@ RUN [ \
 
 # Copy in the braccio_arduino_ros_rviz
 RUN mkdir -p ~/catkin_ws/src
-COPY ./braccio_arduino_ros_rviz ~/catkin_ws/src/braccio_arduino_ros_rviz
+COPY ./braccio_arduino_ros_rviz /home/developer/catkin_ws/src/braccio_arduino_ros_rviz
 
 # Create catkin workspace and clone braccio_arduino_ros_rviz
 RUN [ \

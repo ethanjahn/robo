@@ -21,23 +21,35 @@ services:
     depends_on: 
       - roscore
 
-  roboeyes:
-    build: ./robo-eyes
-    image: ethanjahn/roboeyes:1.0.0
-    container_name: roboeyes
+  #roboeyes:
+  #  build: ./robo-eyes
+  #  image: ethanjahn/roboeyes:1.0.0
+  #  container_name: roboeyes
+  #  network_mode: "host"
+  #  tty: true
+  #  environment:
+  #    - "DISPLAY=${DISPLAY}"
+  #    - ARDUINO_IDE_VERSION=1.8.13
+  #  volumes:
+  #    - "/tmp/.X11-unix:/tmp/.X11-unix"
+  #    - "/dev/ttyACM0:/dev/ttyACM0"
+  #    - "${HOME}/topics:/topics"
+  #  privileged: true
+  #  command: bash /home/developer/eyes.sh
+  #  depends_on: 
+  #    - roscore
+  #    - robo
+
+  robobrain:
+    build: ./robo-brain
+    container_name: robobrain
     network_mode: "host"
+    command: bash
     tty: true
-    environment:
-      - "DISPLAY=${DISPLAY}"
-      - ARDUINO_IDE_VERSION=1.8.13
-    volumes:
-      - "/tmp/.X11-unix:/tmp/.X11-unix"
-      - "/dev/ttyACM0:/dev/ttyACM0"
-      - "${HOME}/topics:/topics"
-    privileged: true
-    command: bash /home/developer/eyes.sh
     depends_on: 
       - roscore
+    volumes:
+      - "${HOME}/robo/robo-brain:/home/developer"
 
   roscore:
     image: ethanjahn/robo:1.0.0
@@ -79,6 +91,7 @@ services:
     tty: true
     privileged: true
     
+
 
 
 
